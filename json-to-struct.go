@@ -264,7 +264,9 @@ func convertKeysToStrings(obj map[interface{}]interface{}) map[string]interface{
 }
 
 func isUnderSlash(s string) bool {
-	return strings.Contains(s, "_") || strings.ToLower(s) == s
+	return strings.Contains(s, "_") ||
+		strings.ToLower(s) == s ||
+		strings.ToUpper(s) == s
 }
 
 func underSlashToCamel(s string) string {
