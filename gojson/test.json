@@ -1,0 +1,56 @@
+{
+    "id": "baa3664015434140a85b0fa98561100e",
+    "insured_object": {
+        "order_number": "a33452a40c5447af9301030b44375522",
+        "platform_order_id": "",
+        "trackings": [
+            {
+                "courier": "string",
+                "tracking_number": "string"
+            },
+            {
+                "courier": "string2",
+                "tracking_number": "string2"
+            }
+        ],
+        "currency": "USD",
+        "order_items": [
+            {
+                "name": "string",
+                "quantity": 1,
+                "unit_price": 12.3,
+                "sku": "",
+                "image_urls": null
+            }
+        ],
+        "order_time": "2021-08-19T11:48:22.000Z",
+        "subtotal": 124.53,
+        "shipping": {
+            "country": "string",
+            "zip": "string",
+            "city": "string",
+            "state": "string"
+        },
+        "ship_date": ""
+    },
+    "insurance_order_id": "fd9ee359432a453ca0f177ce086ea0ee",
+    "external_policy_number": "23271403",
+    "status": "inactive",
+    "claim_url": "https://claims.insureship.com/lookup",
+    "created_at": "2021-10-14T09:05:19.078668Z",
+    "updated_at": "2021-10-14T09:05:19.078668Z",
+    "organization_id": "string",
+    "product_code": "32423",
+    "insurance_type": "shipment",
+    "insurance_platform": "insureship",
+    "premium": 124.53,
+    "amount": 2.99,
+    "currency": "USD",
+    "insurant_name": "fake-foam-data3",
+    "insurant_email": "f.zou@aftership.com",
+    "insurant_phone": "",
+    "effective_time": "",
+    "expiration_time": "",
+    "app_key": "",
+    "app_platform": ""
+}

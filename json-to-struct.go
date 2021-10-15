@@ -263,6 +263,19 @@ func convertKeysToStrings(obj map[interface{}]interface{}) map[string]interface{
 	return res
 }
 
+func isUnderSlash(s string) bool {
+	return strings.Contains(s, "_") || strings.ToLower(s) == s
+}
+
+func underSlashToCamel(s string) string {
+	vars := strings.Split(s, "_")
+	retStr := ""
+	for _, v := range vars {
+		retStr += strings.Title(v)
+	}
+	return retStr
+}
+
 // Generate go struct entries for a map[string]interface{} structure
 func generateTypes(obj map[string]interface{}, structName string, tags []string, depth int, subStructMap map[string]string, convertFloats bool) string {
 	structure := "struct {"
@@ -276,7 +289,10 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 	for _, key := range keys {
 		value := obj[key]
 		valueType := typeForValue(value, structName, tags, subStructMap, convertFloats)
-
+		varName := key
+		if isUnderSlash(key) {
+			varName = underSlashToCamel(key)
+		}
 		//value = mergeElements(value)
 
 		//If a nested value, recurse
@@ -297,7 +313,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 						if val, ok := subStructMap[sub]; ok {
 							subName = val
 						} else {
-							subName = fmt.Sprintf("%v_sub%v", structName, len(subStructMap)+1)
+							subName = fmt.Sprintf("%v", varName)
 
 							subStructMap[sub] = subName
 						}
@@ -314,7 +330,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 				if val, ok := subStructMap[sub]; ok {
 					subName = val
 				} else {
-					subName = fmt.Sprintf("%v_sub%v", structName, len(subStructMap)+1)
+					subName = fmt.Sprintf("%v", varName)
 
 					subStructMap[sub] = subName
 				}
@@ -328,7 +344,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 				if val, ok := subStructMap[sub]; ok {
 					subName = val
 				} else {
-					subName = fmt.Sprintf("%v_sub%v", structName, len(subStructMap)+1)
+					subName = fmt.Sprintf("%v", varName)
 
 					subStructMap[sub] = subName
 				}
@@ -366,7 +382,7 @@ func FmtFieldName(s string) string {
 		return "_"
 	}
 
-	s = stringifyFirstChar(string(runes))
+	s = (string(runes))
 	name := lintFieldName(s)
 	runes = []rune(name)
 	for i, c := range runes {
